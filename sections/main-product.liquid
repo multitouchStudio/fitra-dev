@@ -1,63 +1,69 @@
-<section class="main-product">
-    <div class="main-product-wrapper">
-        <div>
-            <img
-             width="600"
-             height="500"
-             loading="lazy"
-             src="{{ product.featured_image | image_url }}" />
-        </div>
-        <div>
-            <h2>{{ product.title }}</h2>
-            <p>{{ product.price | money }}</p>
-            <p>{{ product.description }}</p>
-            <h3>Select Size</h3>
-            {% form 'product', product %}
-                <select name="id">
-                    {% for variant in product.variants %}
-                        <option value="{{ variant.id }}">
-                            {{ variant.title }}
-                        </option>
-                    {% endfor %}
-                </select>
-            {% endform %}
-            <button type="submit">Add to Cart</button>
-        </div>
-    </div>
-</section>
-<style>
-    .product-main {
-        background-color: {{ section.settings.background }};
-        color: {{ section.settings.text_color }};
-        padding: 10px;
-    }
 
-    .product-main-wrapper {
-        display: flex;
-    }
-</style>
+
+{% comment %} 
+{% for product in collections.frontpage.products limit: 4 %}
+    <div>
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        {{ product.price | money }}
+        {% unless product.available %}<br><strong>Sold Out</strong>{% endunless %}
+        <a href="{{ product.url |  within: collection }}">
+            <img width="400" height="300" src="{{ product.featured_image.src |  image_url }}" alt="{{ product.featured_image.alt |  escape }}" />
+        </a>
+    </div>
+{% endfor %} {% endcomment %}
+
+{% assign mainProduct = all_products['fitra-activity-band'] %}
+
+{{ mainProduct.title }}
+{{ mainProduct.description }}
+<br>
+{% for image in mainProduct.images %}
+    <img width="400" height="300" src="{{ image | image_url }}" alt="{{ image.alt | escape }}" />
+{% endfor %}
+
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+    <select name="id" id="productSelect">
+        {% for variant in mainProduct.variants %}
+            {% if variant.available %}
+                <option value="{{ variant.id }}">
+                    {{ variant.title }} - {{ variant.price |  money_with_currency }}
+                </option>
+                {% else %}
+                    <option disabled="disabled">
+                        {{ variant.title }} - sold out
+                    </option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <label for="Quantity">Quantity</label>
+    <input type="number" id="Quantity" value="1" min="1">
+    <button type="submit" name="add" id="AddToCart">Add to Cart</button>
+</form>
 
 {% schema %}
     {
-        "name": "main-product",
+        "name": "Main Product",
         "settings": [
             {
                 "type": "color",
                 "id": "background",
-                "label": "Background",
+                "label": "Background Color",
                 "default": "#F4F4F4"
             },
             {
                 "type": "color",
                 "id": "text_color",
-                "label": "Text",
+                "label": "Text Color",
                 "default": "#000"
             }
         ],
         "presets": [
             {
-                "name": "main-product"
+                "name": "Main Product",
+                "category": "Product"
             }
         ]
     }
     {% endschema %}
+    
+    
