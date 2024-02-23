@@ -1,16 +1,5 @@
 <header class="header-nav">
-    <div>
-       
-        {% if settings.customizable_logo != blank %}
-            <a href="/">
-                <img 
-                width="80"
-                height="50"
-                loading="lazy"
-                src="{{ settings.customizable_logo | image_url }}" alt="logo">
-            </a>
-          {% endif %}
-    </div>
+    
     <div>
         <ul class="middle-nav-links">
          {% for link in linklists['main-menu'].links %}  
@@ -18,18 +7,5 @@
          {% endfor %}
         </ul>
     </div>
-    <div class="right-nav-items">
-        <form action="/search">
-            <input type="search" class="search-nav" placeholder="search">
-        </form>
-        {% if settings.customizable_icon != blank %}
-            <a href="/cart">
-                <img 
-                width="40"
-                height="40"
-                loading="lazy"
-                src="{{ settings.customizable_icon | image_url }}" alt="icon">
-            </a>
-        {% endif %}
-    </div>
+  
 </header>
