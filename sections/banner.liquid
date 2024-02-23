@@ -1,0 +1,102 @@
+<section>
+   <div class="banner-wrapper">
+        <div class="slide-text" id="text1"><p>{{ section.settings.slide_text_1 }}</p></div>
+        <div class="slide-text" id="text2"><p>{{ section.settings.slide_text_2 }}</p></div>
+        <div class="slide-text" id="text3"><p>{{ section.settings.slide_text_3 }}</p></div>
+   </div>
+</section>
+
+<style>
+    .banner-wrapper {
+        background: {{ section.settings.background }};
+        padding: 30px;
+        position: relative;
+        
+    }
+
+   .slide-text {
+    position: absolute;
+    left: -150%;
+    transform: translate(0, -50%);
+    color:{{ section.settings.text_color }};
+    padding: 20px;
+    font-size: 20px;
+    transition: left 0.5s ease-in-out;
+   }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+        const text3 = document.getElementById('text3');
+
+        const texts = [text1, text2, text3] ;
+        let currentIndex = 0;
+
+        function slideToMiddle(element){
+            element.style.left = '40%';
+
+        }
+
+        function resetPosition(element){
+            element.style.left = '-100%';
+        }
+
+        function slideText(){
+            resetPosition(texts[currentIndex]);
+            
+            currentIndex = (currentIndex + 1) % texts.length;
+            
+            slideToMiddle(texts[currentIndex]);
+        }
+
+
+        slideToMiddle(texts[currentIndex]);
+
+        setInterval(slideText,3000)
+    })
+</script>
+
+{% schema %}
+{
+    "name": "Banner",
+    "settings": [
+        {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#F4F4F4"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text",
+            "default": "#000"
+        },
+        {
+            "type": "text",
+            "id": "slide_text_1",
+            "label": "Slide Text 1",
+            "default": "Members Free Shipping"
+        },
+        {
+            "type": "text",
+            "id": "slide_text_2",
+            "label": "Slide Text 2",
+            "default": "Save Up to 40%"
+        },
+        {
+            "type": "text",
+            "id": "slide_text_3",
+            "label": "Slide Text 3",
+            "default": "Get Your Gear Faster"
+        }
+    ],
+    "presets": [
+        {
+            "name": "banner"
+        }
+    ]
+}
+{% endschema %}
