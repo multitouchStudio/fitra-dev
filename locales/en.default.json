@@ -1,0 +1,11 @@
+{
+    "general":  {
+        "continue_shopping": "Continue shopping"
+    },
+    "templates": {
+        "404": {
+            "title": "Page not found today",
+            "subtext": "404"
+        }
+    }
+  }

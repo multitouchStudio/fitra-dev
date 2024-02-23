@@ -1,1 +1,27 @@
-[]
+[
+    {
+        "name": "theme_info",
+        "theme_name": "Starter theme",
+        "theme_version": "1.0.0",
+        "theme_author": "Elli Raynai",
+        "theme_documentation_url": "https://github.com/multitouchStudio/filtra",
+        "theme_support_url": "https://github.com/multitouchStudio/filtra"
+      },
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "customizable_logo",
+        "label": "Customizable Logo",
+        "info": "This Logo will be used in the nav bar"
+      },
+      {
+        "type": "image_picker",
+        "id": "customizable_icon",
+        "label": "Customizable Icon",
+        "info": "This Icon will be used in the nav bar"
+      }
+    ]
+  }
+]

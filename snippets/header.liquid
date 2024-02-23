@@ -1,6 +1,6 @@
 <header>
     <div>
-        <ul class="middle-nav-links">
+        <ul>
          {% for link in linklists['main-menu'].links %}  
             <li> {{ link.title | link_to: link.url }}</li>
          {% endfor %}
