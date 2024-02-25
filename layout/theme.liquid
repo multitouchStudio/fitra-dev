@@ -3,8 +3,9 @@
        {{ content_for_header }}
        {{ "theme.css" |  asset_url |  stylesheet_tag }}
     </head>
-    <body>
+    <body class="template-{{ template }}">
         
+        {% section 'cart-link' %}
         <main id="main" role="main">
             {{ content_for_layout }}
         </main>

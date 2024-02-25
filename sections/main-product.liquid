@@ -1,45 +1,44 @@
-
-
-{% comment %} 
-{% for product in collections.frontpage.products limit: 4 %}
-    <div>
-        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        {{ product.price | money }}
-        {% unless product.available %}<br><strong>Sold Out</strong>{% endunless %}
-        <a href="{{ product.url |  within: collection }}">
-            <img width="400" height="300" src="{{ product.featured_image.src |  image_url }}" alt="{{ product.featured_image.alt |  escape }}" />
-        </a>
-    </div>
-{% endfor %} {% endcomment %}
-
 {% assign mainProduct = all_products['fitra-activity-band'] %}
 
-{{ mainProduct.title }}
-{{ mainProduct.description }}
-<br>
-{% for image in mainProduct.images %}
-    <img width="400" height="300" src="{{ image | image_url }}" alt="{{ image.alt | escape }}" />
-{% endfor %}
+<h1>{{ mainProduct.title }}</h1>
 
-<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
-    <select name="id" id="productSelect">
-        {% for variant in mainProduct.variants %}
-            {% if variant.available %}
-                <option value="{{ variant.id }}">
-                    {{ variant.title }} - {{ variant.price |  money_with_currency }}
-                </option>
-                {% else %}
-                    <option disabled="disabled">
-                        {{ variant.title }} - sold out
-                    </option>
-            {% endif %}
-        {% endfor %}
-    </select>
-    <label for="Quantity">Quantity</label>
-    <input type="number" id="Quantity" value="1" min="1">
-    <button type="submit" name="add" id="AddToCart">Add to Cart</button>
-</form>
+<div id="product-images">
+    {% for image in mainProduct.images %}
+        <div class="single-product-image">
+            <img width="400" height="300" src="{{ image | image_url }}" alt="{{ image.alt | escape }}" />
+        </div>
+    {% endfor %}
+</div>
+<div id="product-info">
+    <div class="headline">
+        <h2>{{ 'product.copy.headline' | t }}</h2>
+    </div>
+    <div class="description">
+        <h3>{{ 'product.copy.description_headline' | t }}</h3>
+        {{ mainProduct.description }}
+    </div>
+    <div class="details">
+        <ul>
+            <li>{{ 'product.details_list.item1' | t }}</li>
+            <li>{{ 'product.details_list.item2' | t }}</li>
+        </ul>
+    </div>
 
+    <div class="form-wrapper">
+        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+            <label for="productSelect">{{ mainProduct.options.first }}</label>
+            <select name="id" id="productSelect">
+                {% for variant in mainProduct.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="add" id="AddToCart">
+                {{ 'product.form.submit' | t }}
+                <span class="product-price">{{ mainProduct.price | money_without_trailing_zeros }}</span>
+            </button>
+        </form>
+    </div>
+</div>
 {% schema %}
     {
         "name": "Main Product",

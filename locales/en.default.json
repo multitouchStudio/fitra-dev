@@ -1,11 +1,28 @@
 {
-    "general":  {
-        "continue_shopping": "Continue shopping"
+    "general": {
+    "404": {
+        "title": "Not found",
+        "subtext_html": "The page you were looking for does not exist"
+        }
     },
-    "templates": {
-        "404": {
-            "title": "Page not found today",
-            "subtext": "404"
+    "product": {
+        "copy": {
+            "headline": "Hassle free tracking.",
+            "description_headline": "Information"
+        },
+        "details_list": {
+            "item1": "Companion apps of iOS & Android",
+            "item2": "Preorders begin shipping this March"
+        },
+        "form": {
+            "submit": "Preorder"
+        }
+    },
+    "cart": {
+        "button": {
+            "filled": "Your Cart",
+            "empty": "Your Cart is empty",
+            "close": "Close"
         }
     }
-  }
+}
