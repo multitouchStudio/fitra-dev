@@ -1,11 +1,10 @@
+<h1>Cart</h1>
 {% if cart.item_count > 0 %}
-    <h1>Cart</h1>
     <form action="/cart" method="post" novalidate>
         <table>
             <thead>
                 <th colspan="2">Prod</th>
                 <th>Price</th>
-                <th>Qty</th>
                 <th>Total</th>
             </thead>
             <tbody>
@@ -23,15 +22,7 @@
                         </td>
                         <td>{{ item.price | money }}</td>
                         <td>
-                            <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-                        </td>
-                        <td>
-                            {% if item.original_line_price != item.line_price %}
-                                {{ item.original_line_price | money }}
-                            {% endif %}
-                            {% for discount in item.discounts %}
-                                {{ discount.title }}
-                            {% endfor %}
+                                {{ item.original_line_price | money_without_trailing_zeros }}
                         </td>
                     </tr>
                 {% endfor %}
@@ -44,7 +35,7 @@
         </div>
     </form>
     {% else %}
-    <h2>Cart</h2>
+
     Cart if empty
 {% endif %}
 
