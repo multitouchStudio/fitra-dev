@@ -6,3 +6,9 @@
 ethumbs.db
 Thumbs.db
 node_modules
+
+# Additions for Vite and package files
+/src/
+package-lock.json
+package.json
+vite.config.js
