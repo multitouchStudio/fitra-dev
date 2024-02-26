@@ -1,8 +1,13 @@
 <html>
     <head>
        {{ content_for_header }}
+<<<<<<< HEAD
        <!-- {{ "theme.css" |  asset_url |  stylesheet_tag }} -->
        {{ "application.css.liquid" |  asset_url | stylesheet_tag }}
+=======
+       {{ "theme.css" |  asset_url |  stylesheet_tag }}
+       {{ "application.css" |  asset_url | stylesheet_tag }}
+>>>>>>> f7c8cf4 (tried to add the css file)
     </head>
     <body class="template-{{ template }}">
         
