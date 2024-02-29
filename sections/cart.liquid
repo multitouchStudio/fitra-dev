@@ -14,7 +14,7 @@
         <div id="cart-content" class="grid two-columns">
             {% if cart.item_count > 0 %}
                 <h2>{{ 'cart.general.preorder_info' | t }}</h2>
-                <form action="/cart" method="post" novalidate>
+                <form id="cart-filled-color" action="/cart" method="post" novalidate>
                     <table>
                         <thead>
                             <th colspan="2">{{ 'cart.lines.title' | t }}</th>
